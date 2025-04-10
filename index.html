@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" class="dark"> <head>
+<html lang="en" class="dark">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Wind Investor Portal</title>
@@ -8,16 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
-        // Optional: Configure Tailwind theme extensions if needed
+        // Configure Tailwind theme
         tailwind.config = {
-          darkMode: 'class', // Ensure dark mode is enabled via class
+          darkMode: 'class',
           theme: {
             extend: {
               colors: {
                 'brand-purple': '#6366f1', // indigo-500
                 'brand-purple-light': '#818cf8', // indigo-400
                 'brand-purple-dark': '#4f46e5', // indigo-600
-                // Add bright colors for icons
+                // Bright colors for icons
                 'icon-bright-teal': '#5eead4', // teal-300
                 'icon-bright-yellow': '#fde047', // yellow-300
                 'icon-bright-pink': '#f9a8d4', // pink-300
@@ -34,69 +35,61 @@
         /* Custom styles */
         body {
             font-family: 'Inter', sans-serif;
-            /* Dark background applied via Tailwind */
+            overflow: hidden; /* Step 3: Prevent body scroll */
         }
         /* Style for the horizontal scroll container */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Dark mode base styles (can be overridden by Tailwind utilities) */
+        /* Dark mode base styles */
         .dark body {
-            background-color: #111827; /* Tailwind gray-900 */
-            color: #d1d5db; /* Tailwind gray-300 */
+            background-color: #111827; /* gray-900 */
+            color: #d1d5db; /* gray-300 */
         }
-        .dark .bg-card { background-color: #1f2937; } /* Tailwind gray-800 */
-        .dark .border-card { border-color: #374151; } /* Tailwind gray-700 */
-        .dark .text-muted { color: #9ca3af; } /* Tailwind gray-400 */
-        .dark .text-heading { color: #f9fafb; } /* Tailwind gray-50 */
-        .dark .text-link { color: #818cf8; } /* Tailwind indigo-400 */
-        .dark .hover\:text-link-hover:hover { color: #a5b4fc; } /* Tailwind indigo-300 */
+        .dark .bg-card { background-color: #1f2937; } /* gray-800 */
+        .dark .border-card { border-color: #374151; } /* gray-700 */
+        .dark .text-muted { color: #9ca3af; } /* gray-400 */
+        .dark .text-heading { color: #f9fafb; } /* gray-50 */
+        .dark .text-link { color: theme('colors.brand-purple-light'); }
+        .dark .hover\:text-link-hover:hover { color: theme('colors.brand-purple'); }
 
 
-        /* Tab active style for dark mode */
+        /* Tab active style */
         .dark .tab-active {
             font-weight: 600;
             border-bottom: 2px solid theme('colors.brand-purple-light');
             color: theme('colors.brand-purple-light');
         }
-        /* Style for active footer button text in dark mode */
-        .dark .footer-nav-active span { /* Target the span containing text */
+        /* Style for active footer button text */
+        .dark .footer-nav-active span {
              color: theme('colors.brand-purple-light');
-             font-weight: 600;
+             /* font-semibold is now applied directly */
         }
-        /* Ensure pages take up space */
-        .page {
-            display: none; /* Hide pages by default */
-            flex-grow: 1; /* Allow page content to grow */
-            width: 100%;
-        }
-        .page-active {
-            display: block; /* Show active page */
-        }
-        /* Add some spacing for page content */
-        .page-content {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
+         /* Style for active footer button icon */
+         .dark .footer-nav-active img {
+             color: var(--active-icon-color, theme('colors.brand-purple-light')); /* Use dynamic color set by JS */
+         }
+
+        /* Page visibility */
+        .page { display: none; flex-grow: 1; width: 100%; }
+        .page-active { display: block; }
+        .page-content { padding-top: 1rem; padding-bottom: 1rem; }
     </style>
 </head>
-<body class="text-gray-300 bg-gray-900"> <div class="container mx-auto max-w-md p-4 min-h-screen flex flex-col border border-gray-700 rounded-lg shadow-lg bg-gray-800"> <header class="grid grid-cols-3 items-center mb-2 flex-shrink-0"> <div class="flex justify-start">
+<body class="text-gray-300 bg-gray-900">
+    <div class="container mx-auto max-w-md p-4 h-screen flex flex-col border border-gray-700 rounded-lg shadow-lg bg-gray-800">
+        <header class="grid grid-cols-3 items-center mb-2 flex-shrink-0">
+            <div class="flex justify-start">
                  <button id="home-button-header" class="border border-indigo-500 bg-indigo-500 text-white font-semibold py-1 px-3 rounded-lg shadow hover:bg-indigo-600 transition duration-150 text-sm">
                     HOME
                  </button>
             </div>
-
             <div class="flex justify-center">
                  <img src="data:image/png;base64,PASTE_YOUR_BASE64_ENCODED_LOGO_DATA_HERE"
                       alt="New Wind Logo"
                       class="h-8 w-auto rounded"
-                      onerror="this.onerror=null; this.src='https://placehold.co/100x30/6366f1/ffffff?text=New+Wind';"> </div>
-
+                      onerror="this.onerror=null; this.src='https://placehold.co/100x30/6366f1/ffffff?text=New+Wind';">
+            </div>
             <div class="flex items-center justify-end">
                 <button id="messages-button" class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold shadow hover:bg-indigo-600 transition duration-150 flex-shrink-0" aria-label="Messages">
                      <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/mail.svg" alt="Messages" class="w-5 h-5"/>
@@ -104,9 +97,11 @@
             </div>
         </header>
 
-        <div class="text-center mb-4 flex-shrink-0"> <span class="text-sm text-muted">Good morning, Veronica!</span> </div>
+        <div class="text-center mb-4 flex-shrink-0">
+             <span class="text-sm text-muted">Good morning, Veronica!</span>
+        </div>
 
-        <div id="page-container" class="flex-grow flex flex-col overflow-y-auto">
+        <div id="page-container" class="flex-grow flex flex-col overflow-y-auto hide-scrollbar">
 
             <div id="home-page" class="page page-active">
                 <main class="page-content">
@@ -339,7 +334,7 @@
                  <main class="page-content">
                     <h2 class="text-xl font-semibold mb-4 text-indigo-300">Deal Rooms</h2>
                      <div class="space-y-6">
-                        <div class="p-4 bg-card border border-card rounded-lg shadow">
+                         <div class="p-4 bg-card border border-card rounded-lg shadow">
                              <img src="https://placehold.co/400x100/1f2937/ccfbf1?text=Deal+Room+1" alt="Nile Cargo Connect Deal" class="w-full h-24 object-cover rounded-md mb-3" onerror="this.src='https://placehold.co/400x100/374151/9ca3af?text=Image+Error'">
                             <h3 class="font-semibold text-lg mb-2 text-teal-400">Nile Cargo Connect - Series A</h3>
                              <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
@@ -371,29 +366,59 @@
                                 Express Interest / Enter Deal Room
                              </button>
                         </div>
+                        <div class="p-4 bg-card border border-card rounded-lg shadow">
+                             <img src="https://placehold.co/400x100/1f2937/a5b4fc?text=Deal+Room+2" alt="EduLearn Zambia Deal" class="w-full h-24 object-cover rounded-md mb-3" onerror="this.src='https://placehold.co/400x100/374151/9ca3af?text=Image+Error'">
+                            <h3 class="font-semibold text-lg mb-2 text-indigo-400">EduLearn Zambia - Seed Round</h3>
+                             <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                                <p><span class="font-medium text-gray-500">Est. Valuation:</span> $3M (Post-Money)</p>
+                                <p><span class="font-medium text-gray-500">Target Raise:</span> $500,000</p>
+                                <p><span class="font-medium text-gray-500">Min. Ticket:</span> $50,000</p>
+                                <p><span class="font-medium text-gray-500">Closing Date:</span> 2025-05-30</p>
+                            </div>
+                             <div class="mb-3">
+                                <h4 class="font-semibold text-sm mb-1 text-gray-300">Key Documents:</h4>
+                                <ul class="list-disc list-inside text-sm text-link space-y-1">
+                                    <li><a href="#" class="hover:underline hover:text-link-hover">Pitch Deck (Seed)</a></li>
+                                    <li><a href="#" class="hover:underline hover:text-link-hover">Financial Model</a></li>
+                                    <li><a href="#" class="hover:underline hover:text-link-hover">SAFE Note Template</a></li>
+                                </ul>
+                            </div>
+                             <div class="mb-2">
+                                <h4 class="font-semibold text-sm mb-1 text-gray-300">Upcoming Events:</h4>
+                                <p class="text-sm text-muted">- Investor Demo Day (Apr 25)</p>
+                                <p class="text-sm text-muted">- Final Q&A Session (May 15)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1 text-gray-300">Recent Updates:</h4>
+                                <p class="text-sm text-muted">- Pilot results summary added (Apr 10)</p>
+                            </div>
+                             <button class="mt-4 w-full bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-indigo-600 transition duration-150">
+                                Express Interest / Enter Deal Room
+                             </button>
                         </div>
+                     </div>
                 </main>
             </div>
 
-        </div> <footer class="border-t border-gray-700 pt-4 mt-auto flex-shrink-0">
-            <nav class="flex justify-around">
-                <button id="portfolio-button" data-page="portfolio-page" class="footer-nav-button flex flex-col items-center text-center text-xs w-1/3 group">
-                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/briefcase.svg" alt="Portfolio" class="w-6 h-6 mb-1 text-icon-bright-teal group-hover:text-icon-active-teal"/>
-                    <span class="text-gray-400 group-hover:text-brand-purple-light">MY PORTFOLIO</span>
+        </div> <footer class="border-t border-gray-700 pt-2 pb-1 mt-auto flex-shrink-0"> <nav class="flex justify-around items-stretch"> <button id="portfolio-button" data-page="portfolio-page" class="footer-nav-button flex flex-col items-center justify-center text-center text-xs w-1/3 group hover:bg-gray-700 rounded-lg p-2 transition-colors duration-150"> <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/briefcase.svg" alt="Portfolio" class="w-6 h-6 mb-1 text-icon-bright-teal group-hover:text-icon-active-teal"/>
+                    <span class="text-gray-400 font-semibold group-hover:text-brand-purple-light">MY PORTFOLIO</span>
                 </button>
-                <button id="opportunities-button" data-page="opportunities-page" class="footer-nav-button flex flex-col items-center text-center text-xs w-1/3 group">
-                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/lightbulb.svg" alt="Opportunities" class="w-6 h-6 mb-1 text-icon-bright-yellow group-hover:text-icon-active-yellow"/>
-                     <span class="text-gray-400 group-hover:text-brand-purple-light">MY OPPORTUNITIES</span>
+                <button id="opportunities-button" data-page="opportunities-page" class="footer-nav-button flex flex-col items-center justify-center text-center text-xs w-1/3 group hover:bg-gray-700 rounded-lg p-2 transition-colors duration-150"> <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/lightbulb.svg" alt="Opportunities" class="w-6 h-6 mb-1 text-icon-bright-yellow group-hover:text-icon-active-yellow"/>
+                     <span class="text-gray-400 font-semibold group-hover:text-brand-purple-light">MY OPPORTUNITIES</span>
                 </button>
-                <button id="deal-rooms-button" data-page="deal-rooms-page" class="footer-nav-button flex flex-col items-center text-center text-xs w-1/3 group">
-                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/message-square.svg" alt="Deal Rooms" class="w-6 h-6 mb-1 text-icon-bright-pink group-hover:text-icon-active-pink"/>
-                     <span class="text-gray-400 group-hover:text-brand-purple-light">DEAL ROOMS</span>
+                <button id="deal-rooms-button" data-page="deal-rooms-page" class="footer-nav-button flex flex-col items-center justify-center text-center text-xs w-1/3 group hover:bg-gray-700 rounded-lg p-2 transition-colors duration-150"> <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/message-square.svg" alt="Deal Rooms" class="w-6 h-6 mb-1 text-icon-bright-pink group-hover:text-icon-active-pink"/>
+                     <span class="text-gray-400 font-semibold group-hover:text-brand-purple-light">DEAL ROOMS</span>
                 </button>
             </nav>
         </footer>
 
+         <div class="mt-4 text-center flex-shrink-0"> <p class="text-xs text-gray-500">
+                Copyright Ⓒ 2025 The Provider makes no warranties, express or implied, including but not limited to, the implied warranties of merchantability and fitness for a particular purpose. This tool and its content does not constitute financial advice and should not be used as such.
+            </p>
+         </div>
+
     </div> <script>
-        // Javascript remains the same
+        // Javascript remains largely the same, only icon color mapping updated if needed
         document.addEventListener('DOMContentLoaded', () => {
             const pages = document.querySelectorAll('.page');
             const homeButtonHeader = document.getElementById('home-button-header');
@@ -402,87 +427,78 @@
             const reshapeTabs = document.querySelectorAll('.reshape-tab');
             const reshapeTabContent = document.getElementById('reshape-tab-content');
 
-            // Store icon colors mapping
+            // Icon colors mapping (remains the same as previous version)
             const iconColors = {
                 'portfolio-page': { default: 'text-icon-bright-teal', active: 'text-icon-active-teal' },
                 'opportunities-page': { default: 'text-icon-bright-yellow', active: 'text-icon-active-yellow' },
                 'deal-rooms-page': { default: 'text-icon-bright-pink', active: 'text-icon-active-pink' }
             };
-             const defaultIconColor = 'text-gray-400'; // Fallback if page not mapped
+             // Define all possible icon color classes for robust removal
+             const allIconColorClasses = [
+                'text-icon-bright-teal', 'text-icon-active-teal',
+                'text-icon-bright-yellow', 'text-icon-active-yellow',
+                'text-icon-bright-pink', 'text-icon-active-pink'
+             ];
+
+             const defaultFooterTextColor = 'text-gray-400'; // Default footer text color
+             const activeFooterTextColor = 'text-brand-purple-light'; // Active text color
 
             // --- Page Navigation Function ---
             function showPage(pageId) {
-                // Hide all pages
-                pages.forEach(page => {
-                    page.classList.remove('page-active');
-                });
-
-                // Show the target page
+                pages.forEach(page => page.classList.remove('page-active'));
                 const targetPage = document.getElementById(pageId);
                 if (targetPage) {
                     targetPage.classList.add('page-active');
                 } else {
                     console.error(`Page with ID ${pageId} not found.`);
-                    // Fallback to home page if target not found
-                     document.getElementById('home-page').classList.add('page-active');
-                     pageId = 'home-page'; // Update pageId for footer highlighting
+                    document.getElementById('home-page').classList.add('page-active'); // Fallback
+                    pageId = 'home-page';
                 }
 
-                 // --- Update Footer Navigation Highlighting ---
+                // --- Update Footer Navigation Highlighting ---
                 footerNavButtons.forEach(button => {
                     const buttonPageId = button.dataset.page;
                     const textSpan = button.querySelector('span');
                     const iconImg = button.querySelector('img');
-                    const colors = iconColors[buttonPageId] || { default: defaultIconColor, active: 'text-brand-purple-light' }; // Use mapped colors or fallback
+                    const colors = iconColors[buttonPageId] || { default: defaultFooterTextColor, active: activeFooterTextColor }; // Fallback for colors needed? No, iconColors map is complete.
 
-                    // Reset styles first
-                    textSpan.classList.remove('footer-nav-active', 'text-brand-purple-light', 'font-semibold');
-                    textSpan.classList.add('text-gray-400'); // Default dark mode footer text color
+                    // Reset styles
+                    textSpan.classList.remove('footer-nav-active', activeFooterTextColor); // Removed font-semibold here, added in HTML
+                    textSpan.classList.add(defaultFooterTextColor);
 
-                    // Reset icon color to its specific default bright color
-                    iconImg.classList.remove(colors.active);
-                    // Remove other potential colors if necessary (more robust reset)
-                    Object.values(iconColors).forEach(c => {
-                         iconImg.classList.remove(c.default, c.active);
-                    });
-                    iconImg.classList.add(colors.default); // Add specific default bright color
+                    // Robustly remove all potential icon color classes
+                    iconImg.classList.remove(...allIconColorClasses);
+                    // Add the correct default bright color class
+                    iconImg.classList.add(colors.default);
 
+                    button.classList.remove('bg-gray-700'); // Remove potential active background
 
                     // Apply active styles
                     if (buttonPageId === pageId) {
-                        textSpan.classList.add('footer-nav-active'); // Applies specific color via CSS
-                        textSpan.classList.remove('text-gray-400');
-                        textSpan.classList.add('text-brand-purple-light', 'font-semibold'); // Active text color
-
-                        // Set active icon color
+                        textSpan.classList.add('footer-nav-active'); // Applies active text color via CSS rule
+                        textSpan.classList.remove(defaultFooterTextColor); // Remove default text color
+                        // Icon uses active color
                         iconImg.classList.remove(colors.default);
                         iconImg.classList.add(colors.active); // Active icon color
+                        // Optionally add an active background
+                        // button.classList.add('bg-gray-700');
                     }
                 });
 
-                 // Scroll to top of page container
-                 document.getElementById('page-container').scrollTop = 0;
+                document.getElementById('page-container').scrollTop = 0; // Scroll to top
             }
 
             // --- Event Listeners ---
-
-            // Header Home Button
             if(homeButtonHeader) {
                 homeButtonHeader.addEventListener('click', () => showPage('home-page'));
             }
-
-            // Header Messages Button
-             if(messagesButton) {
+            if(messagesButton) {
                 messagesButton.addEventListener('click', () => showPage('messages-page'));
             }
-
-            // Footer Navigation Buttons
             footerNavButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const pageId = button.dataset.page;
-                    if (pageId) {
-                        showPage(pageId);
-                    }
+                    if (pageId) showPage(pageId);
                 });
             });
 
@@ -490,16 +506,12 @@
              if (reshapeTabs.length > 0 && reshapeTabContent) {
                 reshapeTabs.forEach(tab => {
                     tab.addEventListener('click', () => {
-                        // Remove active class from all tabs
                         reshapeTabs.forEach(t => t.classList.remove('tab-active'));
-                        reshapeTabs.forEach(t => t.classList.add('text-gray-500')); // Reset color
-
-                        // Add active class to the clicked tab
-                        tab.classList.add('tab-active'); // Applies color via CSS
+                        reshapeTabs.forEach(t => t.classList.add('text-gray-500'));
+                        tab.classList.add('tab-active');
                         tab.classList.remove('text-gray-500');
 
-                        // Update content (simple placeholder example)
-                        const tabName = tab.dataset.tab; // Use data-tab attribute
+                        const tabName = tab.dataset.tab;
                         let content = 'Default content.';
                          if (tabName === 'overview') {
                             content = 'Overview content will appear here. This could include portfolio performance, diversification metrics, and key holdings.';
@@ -508,16 +520,13 @@
                         } else if (tabName === 'insights') {
                             content = 'Market insights including sector trends, funding news, and regional analysis relevant to African startups.';
                         }
-                        // Ensure content text color is appropriate for dark mode
                         reshapeTabContent.innerHTML = `<p class="text-gray-400 text-sm">${content}</p>`;
                     });
                 });
             }
 
             // --- Initial Page Load ---
-            // Show home page by default
-             showPage('home-page');
-
+            showPage('home-page');
         });
     </script>
 
